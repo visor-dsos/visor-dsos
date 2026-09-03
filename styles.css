@@ -1,0 +1,84 @@
+:root{
+  --bg:#f4f7fb;
+  --panel:#ffffff;
+  --text:#17324d;
+  --muted:#6b7f93;
+  --accent:#0b6f5c;
+  --line:#dce5ee;
+  --sidebar:#0c2f4f;
+  --sidebar2:#123d63;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;font-family:Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+button{font:inherit}
+.app{display:grid;grid-template-columns:290px 1fr;height:100vh;overflow:hidden}
+.sidebar{
+  background:linear-gradient(180deg,var(--sidebar),var(--sidebar2));
+  color:#fff;padding:22px 16px;display:flex;flex-direction:column;gap:18px
+}
+.brand{padding:4px 8px 14px;border-bottom:1px solid rgba(255,255,255,.16)}
+.brand .eyebrow{font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:#9fd5ca;font-weight:700}
+.brand h1{font-size:19px;margin:7px 0 6px;line-height:1.25}
+.brand p{font-size:12px;margin:0;color:#cbd8e5;line-height:1.45}
+.nav{display:flex;flex-direction:column;gap:8px;overflow:auto}
+.nav button{
+  width:100%;text-align:left;border:0;border-radius:10px;padding:12px 13px;
+  background:transparent;color:#e7eef5;cursor:pointer;font-size:13px;line-height:1.35
+}
+.nav button:hover,.nav button.active{background:rgba(255,255,255,.12);color:#fff}
+.nav button:disabled{opacity:.75;cursor:default}
+.nav small{display:block;color:#9fb2c5;margin-top:3px;font-size:11px}
+.sidebarFooter{margin-top:auto;color:#9fb2c5;font-size:11px;padding:8px;line-height:1.4}
+.main{display:flex;flex-direction:column;min-width:0}
+.topbar{
+  height:66px;background:var(--panel);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;padding:0 22px;gap:16px
+}
+.title{font-weight:700;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.actions{display:flex;gap:8px}
+.actions button{
+  border:1px solid var(--line);background:#fff;padding:8px 11px;border-radius:8px;cursor:pointer;color:var(--text)
+}
+.actions button:disabled{opacity:.45;cursor:not-allowed}
+.content{position:relative;flex:1;min-height:0;background:var(--bg)}
+.home{height:100%;overflow:auto;padding:28px}
+.hero{
+  background:linear-gradient(135deg,#ffffff,#eef8f5);border:1px solid var(--line);
+  border-radius:16px;padding:26px;margin-bottom:22px
+}
+.hero h2{margin:0 0 8px;font-size:26px}
+.hero p{margin:0;color:var(--muted);max-width:920px;line-height:1.55}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:16px}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;
+  box-shadow:0 3px 12px rgba(20,50,75,.05);transition:.18s
+}
+.card.clickable{cursor:pointer}
+.card.clickable:hover{transform:translateY(-2px);box-shadow:0 7px 20px rgba(20,50,75,.10)}
+.card .topline{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.card .icon{font-size:28px}
+.card .tag{font-size:10px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.6px}
+.card h3{font-size:16px;margin:10px 0 7px;line-height:1.35}
+.card p{font-size:13px;color:var(--muted);margin:0;line-height:1.45}
+.status{display:inline-flex;margin-top:13px;padding:5px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.ready{background:#e9f7f2;color:#11715d}
+.pending{background:#fff4da;color:#966700}
+.viewer{display:none;height:100%;background:#fff}
+iframe{width:100%;height:100%;border:0}
+.placeholder{display:none;height:100%;align-items:center;justify-content:center;padding:30px;text-align:center}
+.placeholder .box{
+  background:#fff;border:1px dashed #b8c6d5;border-radius:16px;padding:38px;max-width:650px
+}
+.placeholder h2{margin:0 0 10px}
+.placeholder p{color:var(--muted);line-height:1.55;margin:0}
+@media(max-width:850px){
+  .app{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+  .sidebar{padding:10px 12px;gap:10px}
+  .brand{border-bottom:0;padding-bottom:4px}
+  .brand p,.sidebarFooter{display:none}
+  .nav{flex-direction:row;overflow-x:auto}
+  .nav button{min-width:190px;background:rgba(255,255,255,.06)}
+  .main{min-height:0}
+  .topbar{height:58px;padding:0 14px}
+  .home{padding:16px}
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Visor Integrado de Seguimiento DSOS">
+  <title>Visor Integrado DSOS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="eyebrow">SUNASS · DSOS</div>
+      <h1 id="brandTitle">Visor Integrado de Seguimiento DSOS</h1>
+      <p id="brandSubtitle"></p>
+    </div>
+
+    <nav class="nav" id="nav">
+      <button id="homeButton" class="active" type="button">🏠 Inicio<small>Panel principal</small></button>
+    </nav>
+
+    <div class="sidebarFooter" id="entity"></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="title" id="pageTitle">Inicio</div>
+      <div class="actions">
+        <button type="button" id="goHome">Inicio</button>
+        <button type="button" id="openNew" disabled>Abrir reporte</button>
+      </div>
+    </header>
+
+    <section class="content">
+      <div id="home" class="home">
+        <div class="hero">
+          <h2 id="heroTitle"></h2>
+          <p id="heroSubtitle"></p>
+        </div>
+        <div class="cards" id="cards"></div>
+      </div>
+
+      <div id="viewer" class="viewer">
+        <iframe id="reportFrame" title="Reporte Power BI" allowfullscreen></iframe>
+      </div>
+
+      <div id="placeholder" class="placeholder">
+        <div class="box">
+          <h2 id="placeholderTitle"></h2>
+          <p>
+            Este módulo ya está incorporado en el visor. Cuando el Power BI esté publicado,
+            solo debes pegar su enlace en <strong>config.js</strong> y cambiar
+            <strong>activo: false</strong> por <strong>activo: true</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="config.js"></script>
+<script>
+  let currentUrl = "";
+
+  const nav = document.getElementById("nav");
+  const cards = document.getElementById("cards");
+  const pageTitle = document.getElementById("pageTitle");
+  const openNew = document.getElementById("openNew");
+  const reportFrame = document.getElementById("reportFrame");
+
+  document.title = CONFIG.tituloPortal;
+  document.getElementById("brandTitle").textContent = CONFIG.tituloPortal;
+  document.getElementById("brandSubtitle").textContent = CONFIG.subtituloPortal;
+  document.getElementById("heroTitle").textContent = CONFIG.tituloPortal;
+  document.getElementById("heroSubtitle").textContent = CONFIG.subtituloPortal;
+  document.getElementById("entity").textContent = CONFIG.entidad;
+
+  function setActive(button){
+    document.querySelectorAll(".nav button").forEach(btn => btn.classList.remove("active"));
+    if(button) button.classList.add("active");
+  }
+
+  function showOnly(section){
+    document.getElementById("home").style.display = section === "home" ? "block" : "none";
+    document.getElementById("viewer").style.display = section === "viewer" ? "block" : "none";
+    document.getElementById("placeholder").style.display = section === "placeholder" ? "flex" : "none";
+  }
+
+  function showHome(){
+    setActive(document.getElementById("homeButton"));
+    currentUrl = "";
+    pageTitle.textContent = "Inicio";
+    openNew.disabled = true;
+    reportFrame.src = "about:blank";
+    showOnly("home");
+  }
+
+  function loadReport(report, button){
+    setActive(button);
+    if(!report.activo || !report.url){
+      currentUrl = "";
+      pageTitle.textContent = report.nombre;
+      document.getElementById("placeholderTitle").textContent = report.nombre;
+      openNew.disabled = true;
+      showOnly("placeholder");
+      return;
+    }
+
+    currentUrl = report.url;
+    pageTitle.textContent = report.nombre;
+    openNew.disabled = false;
+    reportFrame.src = report.url;
+    showOnly("viewer");
+  }
+
+  CONFIG.reportes.forEach((report) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.innerHTML = `${report.icono} ${report.nombreCorto}<small>${report.activo ? report.categoria : "Próximamente"}</small>`;
+    btn.addEventListener("click", () => loadReport(report, btn));
+    nav.appendChild(btn);
+
+    const card = document.createElement("article");
+    card.className = "card clickable";
+    card.innerHTML = `
+      <div class="topline">
+        <div>
+          <div class="tag">${report.categoria}</div>
+        </div>
+        <div class="icon">${report.icono}</div>
+      </div>
+      <h3>${report.nombre}</h3>
+      <p>${report.descripcion}</p>
+      <span class="status ${report.activo ? "ready" : "pending"}">
+        ${report.activo ? "Disponible" : "Próximamente"}
+      </span>
+    `;
+    card.addEventListener("click", () => btn.click());
+    cards.appendChild(card);
+  });
+
+  document.getElementById("homeButton").addEventListener("click", showHome);
+  document.getElementById("goHome").addEventListener("click", showHome);
+  openNew.addEventListener("click", () => {
+    if(currentUrl) window.open(currentUrl, "_blank", "noopener");
+  });
+
+  showHome();
+</script>
+</body>
+</html>
