@@ -204,6 +204,14 @@ const CONFIG = {
 
       activo: true
     },
+    {
+      id: "pronostico-caudales-diarios",
+      grupo: "grd",
+      nombre: "Pronóstico de Caudales Diarios",
+      icono: "🌊",
+      url: "https://app.powerbi.com/view?r=eyJrIjoiNzg4YmZjOGQtZDRmNi00Njc2LTkwZjktYjI5MDY3ODgwOTM3IiwidCI6ImZlM2RmNThlLWY4NjctNGJmMy1iYzZjLTY3NDkwMWIxYWI5OCIsImMiOjR9&pageName=ReportSectionf68cacf43d4b5824106c",
+      activo: true
+    },
 
     {
       id: "visor-cartografico",
