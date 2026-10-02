@@ -27,6 +27,12 @@ const CONFIG = {
       id: "grd",
       nombre: "GRD y ACC",
       icono: "🌧️"
+    },
+
+    {
+      id: "calidad-agua",
+      nombre: "Calidad de Agua",
+      icono: "💧"
     }
   ],
 
@@ -204,12 +210,16 @@ const CONFIG = {
 
       activo: true
     },
+
     {
       id: "pronostico-caudales-diarios",
       grupo: "grd",
       nombre: "Pronóstico de Caudales Diarios",
       icono: "🌊",
-      url: "https://app.powerbi.com/view?r=eyJrIjoiNzg4YmZjOGQtZDRmNi00Njc2LTkwZjktYjI5MDY3ODgwOTM3IiwidCI6ImZlM2RmNThlLWY4NjctNGJmMy1iYzZjLTY3NDkwMWIxYWI5OCIsImMiOjR9&pageName=ReportSectionf68cacf43d4b5824106c",
+
+      url:
+        "https://app.powerbi.com/view?r=eyJrIjoiNzg4YmZjOGQtZDRmNi00Njc2LTkwZjktYjI5MDY3ODgwOTM3IiwidCI6ImZlM2RmNThlLWY4NjctNGJmMy1iYzZjLTY3NDkwMWIxYWI5OCIsImMiOjR9&pageName=ReportSectionf68cacf43d4b5824106c",
+
       activo: true
     },
 
@@ -221,6 +231,23 @@ const CONFIG = {
 
       url:
         "https://geosunass.sunass.gob.pe/gisportal/apps/webappviewer/index.html?id=1d6324740a194189991f5ebe4d766143",
+
+      activo: true
+    },
+
+
+    // =====================================================
+    // 5. CALIDAD DE AGUA
+    // =====================================================
+
+    {
+      id: "monitoreo-calidad-fuentes",
+      grupo: "calidad-agua",
+      nombre: "Servicio de Monitoreo de la Calidad de Fuentes de Agua",
+      icono: "🧪",
+
+      url:
+        "https://app.powerbi.com/view?r=eyJrIjoiNjE5NDcxZGItMGViNC00YzA1LWE0NDQtYTEwMzJjMzU3NzI1IiwidCI6ImZlM2RmNThlLWY4NjctNGJmMy1iYzZjLTY3NDkwMWIxYWI5OCIsImMiOjR9",
 
       activo: true
     }
