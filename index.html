@@ -148,7 +148,8 @@ CONFIG.grupos.forEach((group, index) => {
 
   const items = document.createElement("div");
   items.className = "groupItems";
-  if(index !== 0) items.classList.add("collapsed");
+  items.classList.add("collapsed");
+  header.classList.add("closed");
 
   header.addEventListener("click", () => {
     items.classList.toggle("collapsed");
