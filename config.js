@@ -117,9 +117,9 @@ const CONFIG = {
       nombre: "BRECHA EN ECOSISTEMAS DE INTERES HÍDRICOS PARA EP",
       icono: "🌍",
 
-      url: "",
+      url: "https://visor-merese-sunass.vercel.app/",
 
-      activo: false
+      activo: true
     },
 
 
